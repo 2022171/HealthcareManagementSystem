@@ -89,3 +89,16 @@ contract HealthcareManagementSystem {
             _bloodType
         );
     }
+ // Function to add a new treatment type, only callable by healthcare provider
+    function addNewTreatment(
+        string memory _treatmentType,
+        uint256 _treatmentPrice
+    ) public onlyHealthcareProvider {
+        // Store new treatment data in the treatment mapping
+        treatment[treatmentTypeCount] = TreatmentTypes(
+            _treatmentType,
+            _treatmentPrice
+        );
+        treatmentTypeCount++; // Increment treatment count for unique ID
+    }
+
