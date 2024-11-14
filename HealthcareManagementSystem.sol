@@ -127,3 +127,20 @@ contract HealthcareManagementSystem {
         totalPaymentCharged = 0; // Reset the total payment charged
         payable(healthcareProvider).transfer(amount); // Transfer funds to the provider
     }
+// Function to get treatment type details by ID
+    function getTreatmentType(uint256 _treatmentID)
+        public
+        view
+        returns (string memory treatmentType, uint256 treatmentPrice)
+    {
+        // Ensure the treatment ID is valid
+        require(_treatmentID < treatmentTypeCount, "Invalid treatment ID.");
+
+        // Retrieve treatment details and return them
+        TreatmentTypes memory selectedTreatment = treatment[_treatmentID];
+        return (
+            selectedTreatment.treatmentType,
+            selectedTreatment.treatmentprice
+        );
+    }
+}
