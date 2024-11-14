@@ -21,3 +21,10 @@ contract HealthcareManagementSystem {
         string gender;
         string bloodType;
     }
+ // Mapping to store treatments by ID and counter for treatment types
+    mapping(uint256 => TreatmentTypes) public treatment;
+    uint256 public treatmentTypeCount;
+
+    // Mapping to store patient data by patient ID and counter for patients
+    mapping(uint256 => PatientData) public patients;
+    uint256 public patientCount;
