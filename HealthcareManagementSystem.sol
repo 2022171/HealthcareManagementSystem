@@ -67,7 +67,7 @@ contract HealthcareManagementSystem {
 
         patientCount++; // Increment patient count for unique ID
     }
-    // New function to update patient data but it will update as transaction//
+    // New function to update patient data but it will update as transaction///
     function updatePatientData(
         uint256 _patientID,
         string memory _name,
