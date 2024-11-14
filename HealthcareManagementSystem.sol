@@ -121,3 +121,9 @@ contract HealthcareManagementSystem {
         emit treatmentChosen(msg.sender, _treatmentID, treatmentCost);
         emit PaymentReceived(msg.sender, msg.value);
     }
+  // Function to withdraw all accumulated payments by the healthcare provider
+    function chargePayment() public onlyHealthcareProvider {
+        uint amount = totalPaymentCharged;
+        totalPaymentCharged = 0; // Reset the total payment charged
+        payable(healthcareProvider).transfer(amount); // Transfer funds to the provider
+    }
