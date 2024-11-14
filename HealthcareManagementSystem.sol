@@ -28,3 +28,7 @@ contract HealthcareManagementSystem {
     // Mapping to store patient data by patient ID and counter for patients
     mapping(uint256 => PatientData) public patients;
     uint256 public patientCount;
+// Events to log important actions (adding patient, choosing treatment, receiving payment)
+    event PatientAdded(uint256 patientID, string name, string treatmentType);
+    event treatmentChosen(address patient, uint256 patientID, uint256 treatmentCost);
+    event PaymentReceived(address patient, uint256 amount);
