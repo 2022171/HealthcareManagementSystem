@@ -67,3 +67,25 @@ contract HealthcareManagementSystem {
 
         patientCount++; // Increment patient count for unique ID
     }
+    // New function to update patient data but it will update as transaction//
+    function updatePatientData(
+        uint256 _patientID,
+        string memory _name,
+        string memory _surname,
+        string memory _dateOfBirth,
+        uint256 _documentNumber,
+        string memory _gender,
+        string memory _bloodType
+    ) public onlyHealthcareProvider {
+        require(_patientID < patientCount, "Patient does not exist.");
+
+        // Update patient data in the mapping
+        patients[_patientID] = PatientData(
+            _name,
+            _surname,
+            _dateOfBirth,
+            _documentNumber,
+            _gender,
+            _bloodType
+        );
+    }
