@@ -32,3 +32,38 @@ contract HealthcareManagementSystem {
     event PatientAdded(uint256 patientID, string name, string treatmentType);
     event treatmentChosen(address patient, uint256 patientID, uint256 treatmentCost);
     event PaymentReceived(address patient, uint256 amount);
+    
+    // Modifier to ensure only the healthcare provider can call certain functions
+    modifier onlyHealthcareProvider() {
+        require(
+            msg.sender == healthcareProvider,
+            "Only the Healthcare Provider can perform this action."
+        );
+        _; // Continue executing the function
+    }
+
+    // Constructor to set the deployer as the healthcare provider
+    constructor() {
+        healthcareProvider = msg.sender;
+    }
+    // Function to add a new patient, only callable by healthcare provider
+    function addNewPatient(
+        string memory _name,
+        string memory _surname,
+        string memory _dateOfBirth,
+        uint256 _documentNumber,
+        string memory _gender,
+        string memory _bloodType
+    ) public onlyHealthcareProvider {
+        // Store new patient data in the patients mapping
+        patients[patientCount] = PatientData(
+            _name,
+            _surname,
+            _dateOfBirth,
+            _documentNumber,
+            _gender,
+            _bloodType
+        );
+
+        patientCount++; // Increment patient count for unique ID
+    }
