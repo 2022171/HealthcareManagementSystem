@@ -102,3 +102,22 @@ contract HealthcareManagementSystem {
         treatmentTypeCount++; // Increment treatment count for unique ID
     }
 
+// Function for patients to get treatment by paying the required amount
+    function getTreatment(uint256 _treatmentID) public payable {
+        // Ensure the treatment ID is valid
+        require(_treatmentID < treatmentTypeCount, "Invalid treatment ID.");
+
+        // Retrieve treatment details and cost
+        TreatmentTypes memory selectedTreatment = treatment[_treatmentID];
+        uint256 treatmentCost = selectedTreatment.treatmentprice;
+
+        // Check if the payment matches the treatment cost
+        require(msg.value == treatmentCost, "Incorrect payment amount.");
+
+        // Add the payment to the total amount charged
+        totalPaymentCharged += msg.value;
+
+        // Emit events for treatment selection and payment received
+        emit treatmentChosen(msg.sender, _treatmentID, treatmentCost);
+        emit PaymentReceived(msg.sender, msg.value);
+    }
