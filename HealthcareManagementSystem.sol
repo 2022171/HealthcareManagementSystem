@@ -6,3 +6,18 @@ contract HealthcareManagementSystem {
 
     uint256 public totalPaymentCharged; // Track total payment charged by the provider
 
+// Struct to define treatment types with name and price
+    struct TreatmentTypes {
+        string treatmentType;
+        uint256 treatmentprice;
+    }
+
+    // Struct to store patient information
+    struct PatientData {
+        string name;
+        string surname;
+        string dateOfBirth;
+        uint256 documentNumber;
+        string gender;
+        string bloodType;
+    }
